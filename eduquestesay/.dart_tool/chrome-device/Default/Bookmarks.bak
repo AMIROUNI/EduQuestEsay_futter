@@ -1,0 +1,195 @@
+{
+   "checksum": "9bada952d78f602ad00ceae7de2f27f6",
+   "checksum_sha256": "eb0cf54c0d8ffd829cd14dd53d8f94559e7b472c1c74e4ed592fb67a0cab8bf9",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13406549322624834",
+            "date_last_used": "0",
+            "guid": "14dc1b31-5d4e-4baf-970c-b43331fd9f9d",
+            "id": "7",
+            "name": "Consulter les notes de version",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://developer.android.com/studio/releases?hl=fr",
+            "visit_count": 0
+         }, {
+            "date_added": "13403007246102490",
+            "date_last_used": "13403795941231615",
+            "guid": "e5993581-d8e2-4e92-8e97-4994f3057a03",
+            "id": "8",
+            "name": "CKAD-exercises/c.pod_design.md at main · dgkanatsios/CKAD-exercises",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://github.com/dgkanatsios/CKAD-exercises/blob/main/c.pod_design.md",
+            "visit_count": 4
+         }, {
+            "date_added": "13402659171941863",
+            "date_last_used": "13407250461460072",
+            "guid": "b53fb8da-d5a0-4f00-bfb7-743fc79b1f46",
+            "id": "9",
+            "name": "emial",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://mail.google.com/mail/u/0/?hl=en#inbox",
+            "visit_count": 62
+         }, {
+            "date_added": "13403120435494643",
+            "date_last_used": "13404385290995511",
+            "guid": "0d234d8c-b1dc-4901-aba1-8cf93e89cd28",
+            "id": "10",
+            "name": "edx",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://edx.tek-up.de/portal/home.faces",
+            "visit_count": 3
+         }, {
+            "date_added": "13403175463743123",
+            "date_last_used": "13406647508933870",
+            "guid": "332394d7-174a-46ac-8bf0-67031e9dac8a",
+            "id": "11",
+            "name": "Module Knowledge Check",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://awsacademy.instructure.com/courses/129680/assignments/1485272?module_item_id=12390091",
+            "visit_count": 9
+         }, {
+            "date_added": "13404497885938014",
+            "date_last_used": "13407145813437574",
+            "guid": "c8e6c0db-878e-4d38-83b4-cf6e07f68156",
+            "id": "12",
+            "name": "Visual Paradigm Online",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://online.visual-paradigm.com/w/pbvqikmb/drive/#proj=0&dashboard",
+            "visit_count": 15
+         }, {
+            "date_added": "13405086560172065",
+            "date_last_used": "13407110731463424",
+            "guid": "77300ac5-8ade-45fd-9f78-bd9826f37c8d",
+            "id": "13",
+            "name": "Untitled | Visual Paradigm Online",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://online.visual-paradigm.com/w/pbvqikmb/diagrams/#diagram:proj=0&type=ClassDiagram&width=11&height=8.5&unit=inch",
+            "visit_count": 4
+         }, {
+            "date_added": "13405086684001335",
+            "date_last_used": "13407274705062648",
+            "guid": "84940327-f79a-4e5d-8113-c9b6c0d64ae7",
+            "id": "14",
+            "name": "Chaige de charge projet",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://chatgpt.com/c/68dd0cb1-f3a0-8325-889e-13054549288e",
+            "visit_count": 4
+         }, {
+            "date_added": "13406509950382060",
+            "date_last_used": "0",
+            "guid": "1a909627-a5f3-4432-8ee6-75f16c6a3575",
+            "id": "15",
+            "name": "أذكار-النوم",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://www.islambook.com/azkar/11/%d8%a3%d8%b0%d9%83%d8%a7%d8%b1-%d8%a7%d9%84%d9%86%d9%88%d9%85-%d9%88%d8%a7%d9%84%d8%a3%d8%ad%d9%84%d8%a7%d9%85",
+            "visit_count": 0
+         }, {
+            "date_added": "13406744240617298",
+            "date_last_used": "0",
+            "guid": "34f1f5c6-1d15-488a-965e-552e3fcc0903",
+            "id": "16",
+            "name": "ChatGPT",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://chatgpt.com/",
+            "visit_count": 0
+         }, {
+            "date_added": "13406744240848828",
+            "date_last_used": "13406744243062062",
+            "guid": "bd893320-7136-47e8-b3a6-1901acc5b7b7",
+            "id": "17",
+            "name": "ChatGPT",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://chatgpt.com/",
+            "visit_count": 1
+         }, {
+            "date_added": "13407084704442378",
+            "date_last_used": "13407269163560305",
+            "guid": "7ee0a751-dd46-4db0-a3d5-eb071e046b64",
+            "id": "18",
+            "name": "Search opportunities | AIESEC",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://aiesec.org/search",
+            "visit_count": 1
+         }, {
+            "date_added": "13407241561229248",
+            "date_last_used": "0",
+            "guid": "a85022c2-4dfb-4830-8fe3-921e10a76a2b",
+            "id": "19",
+            "name": "PFE Books - 2025 - Google Drive",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://drive.google.com/drive/folders/1bTONCPTWKTlZEJ083qQwQ_9QP9BBxVwk",
+            "visit_count": 0
+         } ],
+         "date_added": "13407278642904542",
+         "date_last_used": "0",
+         "date_modified": "13407241561229248",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "Barre des favoris",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "other": {
+         "children": [ {
+            "date_added": "13403049853345554",
+            "date_last_used": "13406727393331699",
+            "guid": "686a2ad7-03f2-43c0-8c84-146ca83c89a4",
+            "id": "6",
+            "name": "(1) Facebook",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://www.facebook.com/",
+            "visit_count": 2
+         } ],
+         "date_added": "13407278642904542",
+         "date_last_used": "0",
+         "date_modified": "13403049853345554",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "Autres favoris",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13407278642904542",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "Favoris de l’appareil mobile",
+         "source": "unknown",
+         "type": "folder"
+      }
+   },
+   "sync_metadata": "CosBCg4IiIECEgikQCJvmgEAABIAGlg2N25ocnhPMWpPaExHYitzYTBLYkJTTVdPYkQ1N0tEUytsaFR5TFhrY0prNXZucjZmR1RSeHhxU1lRdU1wTVF4WkJtM0IwTXRCTHlnazJURFNrTTdKUT09KhhLQnNvZzZ6N0R4a2ExSmhVRm9Sb1hBPT1IA6AGCRKtAQgQEqgBChxGbVJ2UUV2S3BzRkUyMEdzQm1aVE1iTENaNUE9EiQzNGYxZjVjNi0xZDE1LTQ4OGEtOTY1ZS01NTJlM2ZjYzA5MDMYACAAKAAwz/iP/KQzOPj7j/ykM0D4+4/8pDNKHDZuemdvaDIwTkt4Y3AvcWZtUTFKWUhNS3dyMD1aHyId/ytUNXdLRmkyRHB2K1hYejBYRmNCeU4vTURVND1l+JID1cI+AmAFEq0BCBISqAEKHEZyaVZUSzlEVVYzM3NkcHVBQzBndkl0aGl5UT0SJDdlZTBhNzUxLWRkNDYtNGRiMC1hM2Q1LWViMDcxZTA0NmI2NBgAIAAoADCl3rb2pjM4taC8nqYzQLWgvJ6mM0oca1NGb3ZjdWlNVkJoR3hBL0pud3VjRGtnbHVBPVofIh3/aVlaaUs2QnpYT05Nb3IwTk5RVnZDeUJuTDlzPWVSjo7Bwj4CYAUSrQEIDhKoAQocVjRqdzZzY0hEQjIxeG13V2ZUcEs5NTc3TDVJPRIkODQ5NDAzMjctZjc5YS00ZTVkLTgxMTMtYzliNmMwZDY0YWU3GAAgACgAMKOBifmmMziJ9d7lnjNAifXe5Z4zShxEQ1ZpTlptd1VHdHBLN0F5eDYxUFU5L3QwbjA9Wh8iHf0wY0hKZVl4QitJWHJmWUxDRTJrUjFqbVlqdFU9ZfiSA9XCPgJgBRKtAQgKEqgBChxRNzN0ODJNZEZ6dlZUUCtmZmdpUUlNYUhVVTQ9EiQwZDIzNGQ4Yy1iMWRjLTQ5MDEtYWJhMS04Y2Y5M2U4OWNkMjgYACAAKAAwmpqll5wzON7JvcKXM0Deyb3ClzNKHDBEaXJ0TStTYTRBY1I3YVRrM3VDd0REYktTVT1aHyIdrDAvcWgxTXd1ZGNjUVdJZ3R4Z0F0T2E3a21idz1lCrECh8I+AmAFEq0BCA0SqAEKHEVYMEllMnNzeGdUUlpleVRYUllhZFpsS2FXOD0SJDc3MzAwYWM1LThhZGUtNDVmZC05Zjc4LWJkOTgyNmYzN2M4ZBgAIAAoADD97fCqpjM4zanX5Z4zQM2p1+WeM0oceWVxSlhESy9IVDl6MFJoSklKek00NHgvYlIwPVofIh36bld3NUJQbVlkV3hqME83dTA0N1RaMFNES2drPWUeiG2jwj4CYAUSrQEICxKoAQocSUYrbHA0YWJLRmZCWG9HMnV0Q1g4c0gybVBJPRIkMzMyMzk0ZDctMTc0YS00NmFjLThiZjAtNjcwMzFlOWRhYzhhGAAgACgAML6BgM6kMzj4nLPWlzNA+Jyz1pczShx6bXF0UVQzTjBWK2pUMFhUWGU0K0hJc0wzKzA9Wh8iHdZPL3V1RHBLbmRnTVk0ZU9jaUI0UEZKZDBtMkU9ZQD5RmvCPgJgBRKsAQgHEqcBChx6YWcweFlSTm5LWURmL1pQYUcrbm5PVWIvZGs9EiQxNGRjMWIzMS01ZDRlLTRiYWYtOTcwYy1iNDMzMzFmZDlmOWQYACAAKAAwtZ2Xn6QzOM2fl5+kM0DNn5efpDNKHGZrV3JtODFDaXpiVVVxNkJtdFlDSXcwZHVVOD1aHiIcTmUzN013SzJBVHl6dWd4Y3BVVUdNcGJFOXdJPWUAAAAAwj4CYAUSrAEICRKnAQocbG9pQllaYXFNdVZpU1B4dy8yOExkMlJzeDR3PRIkYjUzZmI4ZGEtZDVhMC00ZjAwLWJmYjctNzQzZmM3OWIxZjQ2GAAgACgAMK2iwe2mMzixyb3ClzNAscm9wpczShxHSDZLTG1oYk9TMnpoWElLT3ZibTRTTFIxOUU9Wh4iHFlDZVV6b2hPeUpWQ3ovWFdLRmYzVjBOMGtHOD1lIjmYNsI+AmAFEq0BCA8SqAEKHFpsOWFQK01rNEt3RTlSZjJNc2YxZ0Q5aTNLTT0SJDFhOTA5NjI3LWE1ZjMtNDQzMi04ZWU2LTc1ZjE2YzZhMzU3NRgAIAAoADCAi7SMpDM4xIu0jKQzQMSLtIykM0ocd2NSb2NpYUw2MEdkbkxDVnlYUDRvQkQrTUJvPVofIh3+U3VPRE85UTh3VzlZRVlibVFJVThvN2prd0lVPWVm8DCWwj4CYAUSjgEIAxKJAQocbmpnRHU4OGVDcnZYcDg2cEQ3ZkhHY3FGcDg4PRIkMjA3YzQ3MjYtMmEzZS01YjA0LWI1M2QtN2MwNjA2N2MwNWNhGAAgACgAMJafvcKXMzj7pL3ClzNA+6S9wpczShx5ek5CMDFjbjU0QTdjUlUwdVQrL1BnbVR0VW89WgBlAAAAAMI+AmAAEo4BCAESiQEKHHl4Si82ZnZrZWNyN2twNUVRekI0dFdMcGRiRT0SJGY5MjRkNjUzLTk3ZWQtNTZkNS05N2Q2LTA2MzIyNWQxN2MzORgAIAAoADCPn73ClzM4yKO9wpczQMijvcKXM0ocYVJDV0xnaEY5YjVJbnFLSUR2dUovanZRa0ZjPVoAZQAAAADCPgJgABKtAQgREqgBChx3L2ZnOTBoMmk2TFQxWXlDWTZFeWtxN3lXRGc9EiRiZDg5MzMyMC03MTM2LTQ3ZTgtYjNhNi0xOTAxYWNjNWI3YjcYACAAKAAwlpSQ/KQzONf7j/ykM0DX+4/8pDNKHDlRYlYvU2oreGtzV2dvcERsNDhHdjQvRjMvYz1aHyId/0gwOExFamswMm9CckZScGJEUUVHRXdRelI1cz1l+JID1cI+AmAFEqwBCAgSpwEKHGtXdCsxWFAwdmY0Nkg2Vkd5a1JYNmtJTWNjRT0SJGU1OTkzNTgxLWQ4ZTItNGU5Mi04ZTk3LTQ5OTRmMzA1N2EwMxgAIAAoADCek6L+mTM418i9wpczQNfIvcKXM0ocQklSM29UOHRmTWZUa2t4Uk96cFVaZHo3MEJrPVoeIhxYWklYNzFWekFPbWw0WDZmZGRad2NkcUQyYmM9ZYVn7Q/CPgJgBRKuAQgTEqkBChx3bjFzRVNRb0Fnc0t4QWpFRi9jMFBkbWpYYlU9EiRhODUwMjJjMi00ZGZiLTQ4MzAtOGZlMy05MjFlMTBhNzZhMmIYACAAKAAwuIOi6aYzOPCDoummM0Dwg6LppjNKHEplblVhcGJKRkxmUTlQcmhPUi8rQzNCc2pFdz1aICIe/7RDM3FaZEp0bEdDcjU1cmFmNVpRdjhndjJBQTQ9ZWpk7hLCPgJgBRKOAQgCEokBChxZY1NUb252RVNQd3FDczRMMmNyVmh2NjhMOTg9EiQwOWQzY2UxYS0yZjdiLTUzZjctYmM0Yy0yNzIyYWFkYzNmNmIYACAAKAAwkJ+9wpczOP6jvcKXM0D+o73ClzNKHG9QVmtod0JSYlY2NUtDV1IyK0lPTkhXb091OD1aAGUAAAAAwj4CYAASrAEIBhKnAQocekl5Y05URDBKSklvQ3I0WnBVSnVOT2lJOCtvPRIkNjg2YTJhZDctMDNmMi00M2MwLThjODQtMTQ2Y2E4M2M4OWE0GAAgACgAMIPHrvekMziFyb3ClzNAhcm9wpczShw2OGczS1JOVUpJM2tXVzgwcWhNNlM2OHQ4eTA9Wh4iHGw1WGVDOUxXRFVrUUV2MEtiOVN2a1EwT2g0WT1l9+AEKcI+AmAFEq0BCAwSqAEKHHN6R3pXYjQ1Y2dvQ29XZGRkR2JGYmsrZGErST0SJGM4ZTZjMGRiLTg3OGUtNGQzOC04M2I0LWNmNmUwN2Y2ODE1NhgAIAAoADDg7M67pjM4trT9zJwzQLa0/cycM0ocN3VLMURncUhQdkQ3d3VwUDBxNWk5aCtYdXI4PVofIh31TmtFS3BETFhhNUxwU0Jhd1JhL1FMOTRXWklrPWVXkQtdwj4CYAUwADgA",
+   "version": 1
+}

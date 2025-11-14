@@ -1,0 +1,148 @@
+{
+   "checksum": "529ffcbfab9fdabab677ce7d0e1713ab",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13406549322624834",
+            "date_last_used": "0",
+            "guid": "14dc1b31-5d4e-4baf-970c-b43331fd9f9d",
+            "id": "7",
+            "name": "Consulter les notes de version",
+            "type": "url",
+            "url": "https://developer.android.com/studio/releases?hl=fr"
+         }, {
+            "date_added": "13403007246102490",
+            "date_last_used": "13403795941231615",
+            "guid": "e5993581-d8e2-4e92-8e97-4994f3057a03",
+            "id": "8",
+            "name": "CKAD-exercises/c.pod_design.md at main · dgkanatsios/CKAD-exercises",
+            "type": "url",
+            "url": "https://github.com/dgkanatsios/CKAD-exercises/blob/main/c.pod_design.md"
+         }, {
+            "date_added": "13402659171941863",
+            "date_last_used": "13407250461460072",
+            "guid": "b53fb8da-d5a0-4f00-bfb7-743fc79b1f46",
+            "id": "9",
+            "name": "emial",
+            "type": "url",
+            "url": "https://mail.google.com/mail/u/0/?hl=en#inbox"
+         }, {
+            "date_added": "13403120435494643",
+            "date_last_used": "13404385290995511",
+            "guid": "0d234d8c-b1dc-4901-aba1-8cf93e89cd28",
+            "id": "10",
+            "name": "edx",
+            "type": "url",
+            "url": "https://edx.tek-up.de/portal/home.faces"
+         }, {
+            "date_added": "13403175463743123",
+            "date_last_used": "13406647508933870",
+            "guid": "332394d7-174a-46ac-8bf0-67031e9dac8a",
+            "id": "11",
+            "name": "Module Knowledge Check",
+            "type": "url",
+            "url": "https://awsacademy.instructure.com/courses/129680/assignments/1485272?module_item_id=12390091"
+         }, {
+            "date_added": "13404497885938014",
+            "date_last_used": "13407145813437574",
+            "guid": "c8e6c0db-878e-4d38-83b4-cf6e07f68156",
+            "id": "12",
+            "name": "Visual Paradigm Online",
+            "type": "url",
+            "url": "https://online.visual-paradigm.com/w/pbvqikmb/drive/#proj=0&dashboard"
+         }, {
+            "date_added": "13405086560172065",
+            "date_last_used": "13407110731463424",
+            "guid": "77300ac5-8ade-45fd-9f78-bd9826f37c8d",
+            "id": "13",
+            "name": "Untitled | Visual Paradigm Online",
+            "type": "url",
+            "url": "https://online.visual-paradigm.com/w/pbvqikmb/diagrams/#diagram:proj=0&type=ClassDiagram&width=11&height=8.5&unit=inch"
+         }, {
+            "date_added": "13405086684001335",
+            "date_last_used": "13407274705062648",
+            "guid": "84940327-f79a-4e5d-8113-c9b6c0d64ae7",
+            "id": "14",
+            "name": "Chaige de charge projet",
+            "type": "url",
+            "url": "https://chatgpt.com/c/68dd0cb1-f3a0-8325-889e-13054549288e"
+         }, {
+            "date_added": "13406509950382060",
+            "date_last_used": "0",
+            "guid": "1a909627-a5f3-4432-8ee6-75f16c6a3575",
+            "id": "15",
+            "name": "أذكار-النوم",
+            "type": "url",
+            "url": "https://www.islambook.com/azkar/11/%d8%a3%d8%b0%d9%83%d8%a7%d8%b1-%d8%a7%d9%84%d9%86%d9%88%d9%85-%d9%88%d8%a7%d9%84%d8%a3%d8%ad%d9%84%d8%a7%d9%85"
+         }, {
+            "date_added": "13406744240617298",
+            "date_last_used": "0",
+            "guid": "34f1f5c6-1d15-488a-965e-552e3fcc0903",
+            "id": "16",
+            "name": "ChatGPT",
+            "type": "url",
+            "url": "https://chatgpt.com/"
+         }, {
+            "date_added": "13406744240848828",
+            "date_last_used": "13406744243062062",
+            "guid": "bd893320-7136-47e8-b3a6-1901acc5b7b7",
+            "id": "17",
+            "name": "ChatGPT",
+            "type": "url",
+            "url": "https://chatgpt.com/"
+         }, {
+            "date_added": "13407084704442378",
+            "date_last_used": "13407269163560305",
+            "guid": "7ee0a751-dd46-4db0-a3d5-eb071e046b64",
+            "id": "18",
+            "name": "Search opportunities | AIESEC",
+            "type": "url",
+            "url": "https://aiesec.org/search"
+         }, {
+            "date_added": "13407241561229248",
+            "date_last_used": "0",
+            "guid": "a85022c2-4dfb-4830-8fe3-921e10a76a2b",
+            "id": "19",
+            "name": "PFE Books - 2025 - Google Drive",
+            "type": "url",
+            "url": "https://drive.google.com/drive/folders/1bTONCPTWKTlZEJ083qQwQ_9QP9BBxVwk"
+         } ],
+         "date_added": "13407278642904542",
+         "date_last_used": "0",
+         "date_modified": "13407241561229248",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "Barre de favoris",
+         "type": "folder"
+      },
+      "other": {
+         "children": [ {
+            "date_added": "13403049853345554",
+            "date_last_used": "13406727393331699",
+            "guid": "686a2ad7-03f2-43c0-8c84-146ca83c89a4",
+            "id": "6",
+            "name": "(1) Facebook",
+            "type": "url",
+            "url": "https://www.facebook.com/"
+         } ],
+         "date_added": "13407278642904542",
+         "date_last_used": "0",
+         "date_modified": "13403049853345554",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "Autres favoris",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13407278642904542",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "Favoris d'appareils mobiles",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}
