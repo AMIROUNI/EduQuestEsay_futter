@@ -1,5 +1,7 @@
+import 'package:eduquestesay/core/app_router.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -164,24 +166,51 @@ class AuthService {
     }
   }
 
-  Future<User?> registerWithEmail(String email, String password, String fullName) async {
-    try {
-      final UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      
-      final User? user = userCredential.user;
-      if (user != null) {
-        await _saveUserSession(user);
-        await _saveUserToFirestore(user, fullName);
-      }
-      
+ Future<User?> registerWithEmail(
+  String email,
+  String password,
+  String fullName,
+  String phoneNumber,
+  String role,
+) async {
+  try {
+    // Create user in Firebase Authentication
+    final UserCredential userCredential =
+        await _auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+
+    final User? user = userCredential.user;
+
+    if (user != null) {
+
+      //  Save user data in Firestore
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(user.uid)
+          .set({
+        "uid": user.uid,
+        "email": email,
+        "fullName": fullName,
+        "phoneNumber": phoneNumber,
+        "profileImageUrl": "",       
+        "role": role,
+        "createdAt": DateTime.now().toIso8601String(),
+      });
+
+      //  Save session locally if needed
+      await _saveUserSession(user);
+
+      //  Navigate to home
       return user;
-    } catch (e) {
-      rethrow;
     }
+  } catch (e) {
+    print("Error registering user: $e");
+    rethrow;
   }
+}
+
 
   Future<void> signOut() async {
     try {

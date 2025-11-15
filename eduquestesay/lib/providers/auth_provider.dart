@@ -99,13 +99,16 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  Future<User?> registerWithEmail(String email, String password, String fullName) async {
+  Future<User?>   registerWithEmail(String email, String password, String fullName  ,
+  String phoneNumber,
+  String role,
+ ) async {
     try {
       _isLoading = true;
       _error = null;
       notifyListeners();
 
-      final user = await _authService.registerWithEmail(email, password, fullName);
+      final user = await _authService.registerWithEmail(email, password, fullName, phoneNumber, role);
       _user = user;
       return user;
     } catch (e) {
