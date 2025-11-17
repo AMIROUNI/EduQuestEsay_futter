@@ -31,7 +31,6 @@ class _LoginScreenState extends State<LoginScreen> {
             key: _formKey,
             child: Column(
               children: [
-                // Back Button at Top Left
                 Align(
                   alignment: Alignment.centerLeft,
                   child: IconButton(
@@ -41,10 +40,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 20),
 
-                // Centered Logo Section
                 Column(
                   children: [
-                    // Logo Container - Centered
                     Container(
                       width: 80,
                       height: 80,
@@ -100,7 +97,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        // Email Input Field
                         _buildTextField(
                           controller: _email,
                           label: 'Email',
@@ -117,7 +113,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 20),
 
-                        // Password Input Field
                         _buildPasswordField(
                           controller: _password,
                           label: 'Password',
@@ -134,13 +129,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 16),
 
-                        // Forgot Password - Right Aligned
                         Align(
                           alignment: Alignment.centerRight,
                           child: TextButton(
-                            onPressed: () {
-                              // Add forgot password functionality
-                            },
+                            onPressed: () {},
                             child: Text(
                               'Forgot Password?',
                               style: TextStyle(
@@ -153,30 +145,33 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 32),
 
-                        // Sign In Button - Udemy Style
+                        // 🔥 FIXED LOGIN BUTTON WITH SAFE SETSTATE
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: _isLoading ? null : () async {
-                              if (_formKey.currentState!.validate()) {
-                                setState(() {
-                                  _isLoading = true;
-                                });
-                                
-                                User? user = await authProvider.loginWithEmail(
-                                  _email.text.trim(),
-                                  _password.text,
-                                );
-                                
-                                setState(() {
-                                  _isLoading = false;
-                                });
+                            onPressed: _isLoading
+                                ? null
+                                : () async {
+                                    if (_formKey.currentState!.validate()) {
+                                      setState(() => _isLoading = true);
 
-                                if (user != null && mounted) {
-                                  Navigator.pushReplacementNamed(context, AppRouter.home);
-                                }
-                              }
-                            },
+                                      User? user = await authProvider.loginWithEmail(
+                                        _email.text.trim(),
+                                        _password.text,
+                                      );
+
+                                      if (!mounted) return; // 🔥 FIX
+
+                                      setState(() => _isLoading = false);
+
+                                      if (user != null) {
+                                        Navigator.pushReplacementNamed(
+                                          context,
+                                          AppRouter.home,
+                                        );
+                                      }
+                                    }
+                                  },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.purple.shade700,
                               foregroundColor: Colors.white,
@@ -185,7 +180,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               elevation: 0,
-                              shadowColor: Colors.transparent,
                             ),
                             child: _isLoading
                                 ? const SizedBox(
@@ -207,15 +201,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 24),
 
-                        // Divider with "Or" - Udemy Style
                         Row(
                           children: [
-                            Expanded(
-                              child: Divider(
-                                color: Colors.grey.shade300,
-                                thickness: 1,
-                              ),
-                            ),
+                            Expanded(child: Divider(color: Colors.grey.shade300)),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 16),
                               child: Text(
@@ -223,51 +211,43 @@ class _LoginScreenState extends State<LoginScreen> {
                                 style: TextStyle(
                                   color: Colors.grey.shade500,
                                   fontSize: 14,
-                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),
-                            Expanded(
-                              child: Divider(
-                                color: Colors.grey.shade300,
-                                thickness: 1,
-                              ),
-                            ),
+                            Expanded(child: Divider(color: Colors.grey.shade300)),
                           ],
                         ),
                         const SizedBox(height: 24),
 
-                        // Google Sign In Button - Udemy Style
+                        // 🔥 GOOGLE LOGIN FIXED TOO
                         SizedBox(
                           width: double.infinity,
                           child: OutlinedButton(
-                            onPressed: _isLoading ? null : () async {
-                              setState(() {
-                                _isLoading = true;
-                              });
-                              
-                              User? user = await authProvider.signInWithGoogle();
-                              
-                              setState(() {
-                                _isLoading = false;
-                              });
+                            onPressed: _isLoading
+                                ? null
+                                : () async {
+                                    setState(() => _isLoading = true);
 
-                              if (user != null && mounted) {
-                                Navigator.pushReplacementNamed(context, AppRouter.home);
-                              }
-                            },
+                                    User? user = await authProvider.signInWithGoogle();
+
+                                    if (!mounted) return; // 🔥 FIX
+
+                                    setState(() => _isLoading = false);
+
+                                    if (user != null) {
+                                      Navigator.pushReplacementNamed(
+                                        context,
+                                        AppRouter.home,
+                                      );
+                                    }
+                                  },
                             style: OutlinedButton.styleFrom(
                               foregroundColor: Colors.black,
-                              backgroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 16),
+                              side: BorderSide(color: Colors.grey.shade400),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
-                              side: BorderSide(
-                                color: Colors.grey.shade400,
-                                width: 1,
-                              ),
-                              elevation: 0,
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -276,20 +256,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   'assets/images/google_icon.png',
                                   width: 20,
                                   height: 20,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Container(
-                                      width: 20,
-                                      height: 20,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: NetworkImage(
-                                            'https://cdn-icons-png.flaticon.com/512/2991/2991148.png',
-                                          ),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    );
-                                  },
                                 ),
                                 const SizedBox(width: 12),
                                 const Text(
@@ -305,13 +271,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 32),
 
-                        // Sign Up Redirect - Centered
                         Center(
                           child: GestureDetector(
-                            onTap: _isLoading ? null : () => Navigator.pushReplacementNamed(
-                              context, 
-                              AppRouter.register
-                            ),
+                            onTap: _isLoading
+                                ? null
+                                : () => Navigator.pushReplacementNamed(
+                                      context,
+                                      AppRouter.register,
+                                    ),
                             child: RichText(
                               text: TextSpan(
                                 text: "Don't have an account? ",
@@ -345,7 +312,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // Reusable Text Field Widget - Udemy Style
   Widget _buildTextField({
     required TextEditingController controller,
     required String label,
@@ -356,30 +322,17 @@ class _LoginScreenState extends State<LoginScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Colors.grey.shade300,
-          width: 1.5,
-        ),
+        border: Border.all(color: Colors.grey.shade300, width: 1.5),
       ),
       child: TextFormField(
         controller: controller,
-        style: const TextStyle(
-          color: Colors.black,
-          fontSize: 16,
-        ),
+        style: const TextStyle(fontSize: 16, color: Colors.black),
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: TextStyle(
-            color: Colors.grey.shade600,
-            fontSize: 15,
-          ),
+          labelStyle: TextStyle(color: Colors.grey.shade600),
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-          prefixIcon: Icon(
-            icon, 
-            color: Colors.grey.shade500,
-            size: 22,
-          ),
+          prefixIcon: Icon(icon, color: Colors.grey.shade500),
           floatingLabelBehavior: FloatingLabelBehavior.never,
         ),
         validator: validator,
@@ -387,7 +340,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // Password Field with Visibility Toggle - Udemy Style
   Widget _buildPasswordField({
     required TextEditingController controller,
     required String label,
@@ -398,42 +350,26 @@ class _LoginScreenState extends State<LoginScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Colors.grey.shade300,
-          width: 1.5,
-        ),
+        border: Border.all(color: Colors.grey.shade300, width: 1.5),
       ),
       child: TextFormField(
         controller: controller,
         obscureText: !_isPasswordVisible,
-        style: const TextStyle(
-          color: Colors.black,
-          fontSize: 16,
-        ),
+        style: const TextStyle(fontSize: 16, color: Colors.black),
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: TextStyle(
-            color: Colors.grey.shade600,
-            fontSize: 15,
-          ),
+          labelStyle: TextStyle(color: Colors.grey.shade600),
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-          prefixIcon: Icon(
-            icon, 
-            color: Colors.grey.shade500,
-            size: 22,
-          ),
+          prefixIcon: Icon(icon, color: Colors.grey.shade500),
           suffixIcon: IconButton(
             icon: Icon(
               _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
               color: Colors.grey.shade500,
-              size: 22,
             ),
-            onPressed: () {
-              setState(() {
-                _isPasswordVisible = !_isPasswordVisible;
-              });
-            },
+            onPressed: () => setState(() {
+              _isPasswordVisible = !_isPasswordVisible;
+            }),
           ),
           floatingLabelBehavior: FloatingLabelBehavior.never,
         ),

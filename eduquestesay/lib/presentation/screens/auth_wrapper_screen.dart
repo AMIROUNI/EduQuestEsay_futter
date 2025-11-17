@@ -84,7 +84,7 @@ class _AuthWrapperScreenState extends State<AuthWrapperScreen> {
     // Check if user is authenticated
     if (authProvider.user != null) {
       print('User is authenticated: ${authProvider.user!.email}');
-      return const HomeScreen();
+      return  const CourseSearchWidget();
     } else {
       print('User is not authenticated, showing login screen');
       return const LoginScreen();

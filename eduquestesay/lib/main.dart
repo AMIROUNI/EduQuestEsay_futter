@@ -1,3 +1,5 @@
+import 'package:eduquestesay/providers/course_provider.dart';
+import 'package:eduquestesay/providers/news_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
@@ -28,6 +30,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => CourseProvider()),
+        ChangeNotifierProvider(create: (_) => NewsProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -57,7 +61,7 @@ class AuthWrapper extends StatelessWidget {
         }
 
         if (snapshot.hasData) {
-          return const HomeScreen();
+          return const CourseSearchWidget();
         } else {
           return const LoginScreen();
         }
