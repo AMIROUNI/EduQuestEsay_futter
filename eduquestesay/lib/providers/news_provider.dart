@@ -9,6 +9,9 @@ class NewsProvider extends ChangeNotifier {
   bool get loading => isLoading;
   List<News> newsList = [];
   List<News> get news => newsList;
+  bool _hasError = false;
+  bool  get hasError => _hasError;
+
   
   // Filtering properties
   String _searchQuery = '';
@@ -24,6 +27,8 @@ class NewsProvider extends ChangeNotifier {
       newsList = await _newsService.getAllNews();
       _applyFilter(); // Apply any existing filter after loading
     } catch (e) {
+      this._hasError = true;
+      notifyListeners(); 
       print(" Error loading news in provider: $e");
     }
     finally {

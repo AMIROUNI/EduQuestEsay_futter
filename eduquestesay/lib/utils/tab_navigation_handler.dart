@@ -42,7 +42,7 @@ class TabNavigationHandler {
       case 2:
         return AppRouter.mycourses;
       case 3:
-        return AppRouter.home;
+        return AppRouter.news;
       case 4:
         return '/profile';
       default:

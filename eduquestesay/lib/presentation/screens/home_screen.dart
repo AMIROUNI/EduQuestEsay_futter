@@ -32,7 +32,7 @@ class _CourseSearchWidgetState extends State<CourseSearchWidget> {
     });
 
     return Scaffold(
-      appBar: buildAppBar(context),
+      appBar: buildAppBar(context) ,
       body: Column(
         children: [
           _buildNewsSlider(context),   
