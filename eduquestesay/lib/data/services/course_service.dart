@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'package:eduquestesay/data/models/course_model.dart';
 import 'package:http/http.dart' as http;
 
-
 class CourseService {
   // For web development - use localhost with port 8099
   // Make sure your backend is running on localhost:8099
-  final String apiUrl = "http://localhost:8099/api/courses";
+  final String baseUrl = "http://localhost:8099/api";
 
   Future<List<Course>> fetchCourses() async {
     try {
+      final apiUrl = "$baseUrl/courses";
       print("Fetching courses from: $apiUrl");
       
       final response = await http.get(
@@ -45,6 +45,53 @@ class CourseService {
       // Return mock data for development
       print(" Using mock data due to error");
       return _getMockCourses();
+    }
+  }
+
+  // NEW METHOD: Get enrolled courses for a student
+  Future<List<Course>> fetchEnrolledCourses(String studentEmail) async {
+    try {
+      // URL encode the email to handle special characters like @ and .
+      String encodedEmail = Uri.encodeComponent(studentEmail);
+      final apiUrl = "$baseUrl/courses/get/enrollment/courses/$encodedEmail";
+      
+      print("Fetching enrolled courses from: $apiUrl");
+      
+      final response = await http.get(
+        Uri.parse(apiUrl),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+      ).timeout(const Duration(seconds: 15));
+
+      print(" Response status: ${response.statusCode}");
+      
+      if (response.statusCode == 200) {
+        final dynamic data = json.decode(response.body);
+        print(" Successfully fetched enrolled courses");
+        
+        if (data is List) {
+          final courses = data.map<Course>((courseJson) => Course.fromJson(courseJson)).toList();
+          print(" Parsed ${courses.length} enrolled courses");
+          return courses;
+        } else {
+          print(" Unexpected response format for enrolled courses: $data");
+          return [];
+        }
+      } else if (response.statusCode == 500) {
+        final errorMessage = json.decode(response.body);
+        throw Exception('Server error: $errorMessage');
+      } else {
+        print(" API Error for enrolled courses: ${response.statusCode} - ${response.body}");
+        throw Exception('Failed to load enrolled courses: ${response.statusCode}');
+      }
+    } catch (e) {
+      print("Network Error fetching enrolled courses: $e");
+      
+      // Return mock enrolled courses for development
+      print(" Using mock enrolled courses due to error");
+      return _getMockEnrolledCourses();
     }
   }
 
@@ -105,6 +152,34 @@ class CourseService {
         rating: 4.6,
         category: 'Design',
         duration: 20,
+      ),
+    ];
+  }
+
+  // Mock enrolled courses for development
+  List<Course> _getMockEnrolledCourses() {
+    return [
+      Course(
+        id: '1',
+        title: 'Flutter Development',
+        description: 'Learn Flutter from scratch - ENROLLED',
+        teacherEmail: 'teacher1',
+        createdAt: DateTime.now(),
+        imageUrl: 'https://picsum.photos/200/300?random=1',
+        rating: 4.5,
+        category: 'Mobile Development',
+        duration: 30,
+      ),
+      Course(
+        id: '3',
+        title: 'Web Development',
+        description: 'Master HTML, CSS, and JavaScript - ENROLLED',
+        teacherEmail: 'teacher3',
+        createdAt: DateTime.now(),
+        imageUrl: 'https://picsum.photos/200/300?random=3',
+        rating: 4.7,
+        category: 'Web Development',
+        duration: 40,
       ),
     ];
   }

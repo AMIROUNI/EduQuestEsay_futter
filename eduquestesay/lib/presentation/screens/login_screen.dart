@@ -1,3 +1,4 @@
+import 'package:eduquestesay/data/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -155,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     if (_formKey.currentState!.validate()) {
                                       setState(() => _isLoading = true);
 
-                                      User? user = await authProvider.loginWithEmail(
+                                      UserModel? user = await authProvider.loginWithEmail(
                                         _email.text.trim(),
                                         _password.text,
                                       );
@@ -228,7 +229,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 : () async {
                                     setState(() => _isLoading = true);
 
-                                    User? user = await authProvider.signInWithGoogle();
+                                    UserModel? user = await authProvider.signInWithGoogle();
 
                                     if (!mounted) return; // 🔥 FIX
 

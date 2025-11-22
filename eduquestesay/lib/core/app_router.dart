@@ -1,6 +1,8 @@
 import 'package:eduquestesay/data/models/course_model.dart';
 import 'package:eduquestesay/presentation/screens/course_detail_screen.dart';
 import 'package:eduquestesay/presentation/screens/enrollment_screen.dart';
+import 'package:eduquestesay/presentation/screens/my_courses_screen.dart';
+import 'package:eduquestesay/presentation/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import '../presentation/screens/login_screen.dart';
 import '../presentation/screens/register_screen.dart';
@@ -14,9 +16,19 @@ class AppRouter {
   static const String home = '/home';
   static const String courseDetails = '/courseDetails';
   static const String enrollment = '/enrollment';
+  static const String mycourses = '/my-courses';
+  static const String profile = '/profile';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+          case profile:
+        return MaterialPageRoute(
+          builder: (_) => ProfileScreen(),
+        );
+       case mycourses:
+        return MaterialPageRoute(
+          builder: (_) => MyCoursesScreen(),
+        );
        case enrollment:
         final course = settings.arguments as Course; 
         return MaterialPageRoute(

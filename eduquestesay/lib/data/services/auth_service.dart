@@ -166,7 +166,7 @@ class AuthService {
     }
   }
 
- Future<User?> registerWithEmail(
+Future<User?> registerWithEmail(
   String email,
   String password,
   String fullName,
@@ -184,25 +184,28 @@ class AuthService {
     final User? user = userCredential.user;
 
     if (user != null) {
+      // Save user data in Firestore using UserModel
+      final userModel = UserModel(
+        uid: user.uid,
+        email: email,
+        fullName: fullName,
+        phoneNumber: phoneNumber,
+        profileImageUrl: "",
+        profileImageBase64: "",
+        role: role,
+        createdAt: DateTime.now(),
+        enrolledCourses: [],
+        isPremium: false,
+      );
 
-      //  Save user data in Firestore
       await FirebaseFirestore.instance
           .collection("users")
           .doc(user.uid)
-          .set({
-        "uid": user.uid,
-        "email": email,
-        "fullName": fullName,
-        "phoneNumber": phoneNumber,
-        "profileImageUrl": "",       
-        "role": role,
-        "createdAt": DateTime.now().toIso8601String(),
-      });
+          .set(userModel.toMap());
 
-      //  Save session locally if needed
+      // Save session locally if needed
       await _saveUserSession(user);
 
-      //  Navigate to home
       return user;
     }
   } catch (e) {
@@ -210,7 +213,6 @@ class AuthService {
     rethrow;
   }
 }
-
 
   Future<void> signOut() async {
     try {
@@ -238,6 +240,7 @@ class AuthService {
           fullName: fullName,
           phoneNumber: user.phoneNumber ?? '',
           profileImageUrl: user.photoURL ?? '',
+          profileImageBase64: "",
           role: 'student',
           createdAt: DateTime.now(),
           enrolledCourses: [],
@@ -248,6 +251,81 @@ class AuthService {
       }
     } catch (e) {
       print('Error saving user to Firestore: $e');
+    }
+  }
+
+  Future<void> updateUserProfile({
+    required String userId,
+    String? fullName,
+    String? phoneNumber,
+    String? profileImageUrl,
+  }) async {
+    try {
+      Map<String, dynamic> updateData = {};
+      
+      if (fullName != null) updateData['fullName'] = fullName;
+      if (phoneNumber != null) updateData['phoneNumber'] = phoneNumber;
+      if (profileImageUrl != null) updateData['profileImageUrl'] = profileImageUrl;
+      
+      if (updateData.isNotEmpty) {
+        await _firestore.collection('users').doc(userId).update(updateData);
+      }
+    } catch (e) {
+      print('Error updating user profile: $e');
+      rethrow;
+    }
+  }
+
+  // Update profile image only
+  Future<void> updateProfileImage(String userId, String imageUrl) async {
+    try {
+      await _firestore.collection('users').doc(userId).update({
+        'profileImageUrl': imageUrl,
+      });
+    } catch (e) {
+      print('Error updating profile image: $e');
+      rethrow;
+    }
+  }
+
+  
+
+  Future<void> updateUserProfileWithBase64({
+    required String userId,
+    String? fullName,
+    String? phoneNumber,
+    String? profileImageBase64,
+  }) async {
+    try {
+      Map<String, dynamic> updateData = {};
+      
+      if (fullName != null) updateData['fullName'] = fullName;
+      if (phoneNumber != null) updateData['phoneNumber'] = phoneNumber;
+      if (profileImageBase64 != null) {
+        updateData['profileImageBase64'] = profileImageBase64;
+        // Also update the URL field for backward compatibility
+        updateData['profileImageUrl'] = 'base64://$userId'; 
+      }
+      
+      if (updateData.isNotEmpty) {
+        await _firestore.collection('users').doc(userId).update(updateData);
+      }
+    } catch (e) {
+      print('Error updating user profile with Base64: $e');
+      rethrow;
+    }
+  }
+
+  // Update only Base64 profile image
+  Future<void> updateProfileImageBase64(String userId, String base64Image) async {
+    try {
+      await _firestore.collection('users').doc(userId).update({
+        'profileImageBase64': base64Image,
+        'profileImageUrl': 'base64://$userId', // Marker for Base64 images
+      });
+    } catch (e) {
+      print('Error updating Base64 profile image: $e');
+      rethrow;
     }
   }
 }

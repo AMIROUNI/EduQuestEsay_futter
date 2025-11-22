@@ -5,6 +5,7 @@ class News {
   final String imageUrl;
   final String link;
   final DateTime createdAt;
+  final String category;
 
   News({
     required this.id,
@@ -13,6 +14,7 @@ class News {
     required this.imageUrl,
     required this.link,
     required this.createdAt,
+    required this.category
   });
 
   factory News.fromJson(Map<String, dynamic> json) {
@@ -22,6 +24,7 @@ class News {
       description: json['description'] ?? '',
       imageUrl: json['imageUrl'] ?? '',
       link: json['link'] ?? '',
+      category: json['category'],
       createdAt: DateTime.tryParse(json['createdAt'].toString()) ??
           DateTime.now(),
     );
@@ -34,6 +37,7 @@ class News {
       'description': description,
       'imageUrl': imageUrl,
       'link': link,
+      'category' : category ,
       'createdAt': createdAt.toIso8601String(),
     };
   }

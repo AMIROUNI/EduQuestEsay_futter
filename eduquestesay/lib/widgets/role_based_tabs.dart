@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:eduquestesay/providers/auth_provider.dart';
+import 'package:eduquestesay/data/models/user_model.dart';
 
 class RoleBasedTabs extends StatelessWidget {
   final int currentIndex;
@@ -15,9 +16,12 @@ class RoleBasedTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
-    final userRole = authProvider.user?.role ?? 'STUDENT';
+    final UserModel? user = authProvider.user;
+    
+    final String userRole = user?.role?.toUpperCase() ?? 'STUDENT';
 
-    // Define tabs based on user role
+    print('Current user role: $userRole');
+
     final List<BottomNavigationBarItem> tabs = _getTabsByRole(userRole);
 
     return BottomNavigationBar(
@@ -32,7 +36,7 @@ class RoleBasedTabs extends StatelessWidget {
   }
 
   List<BottomNavigationBarItem> _getTabsByRole(String role) {
-    switch (role.toUpperCase()) {
+    switch (role) {
       case 'ADMIN':
         return _adminTabs();
       case 'TEACHER':
@@ -45,76 +49,31 @@ class RoleBasedTabs extends StatelessWidget {
 
   List<BottomNavigationBarItem> _studentTabs() {
     return const [
-      BottomNavigationBarItem(
-        icon: Icon(Icons.home),
-        label: 'Home',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.school),
-        label: 'Courses',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.assignment),
-        label: 'My Courses',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.article),
-        label: 'News',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.person),
-        label: 'Profile',
-      ),
+      BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+      BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Courses'),
+      BottomNavigationBarItem(icon: Icon(Icons.assignment), label: 'My Courses'),
+      BottomNavigationBarItem(icon: Icon(Icons.article), label: 'News'),
+      BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
     ];
   }
 
   List<BottomNavigationBarItem> _teacherTabs() {
     return const [
-      BottomNavigationBarItem(
-        icon: Icon(Icons.home),
-        label: 'Home',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.school),
-        label: 'My Courses',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.group),
-        label: 'Students',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.analytics),
-        label: 'Analytics',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.person),
-        label: 'Profile',
-      ),
+      BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+      BottomNavigationBarItem(icon: Icon(Icons.school), label: 'My Courses'),
+      BottomNavigationBarItem(icon: Icon(Icons.group), label: 'Students'),
+      BottomNavigationBarItem(icon: Icon(Icons.analytics), label: 'Analytics'),
+      BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
     ];
   }
 
   List<BottomNavigationBarItem> _adminTabs() {
     return const [
-      BottomNavigationBarItem(
-        icon: Icon(Icons.dashboard),
-        label: 'Dashboard',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.people),
-        label: 'Users',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.school),
-        label: 'Courses',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.settings),
-        label: 'Settings',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.person),
-        label: 'Profile',
-      ),
+      BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Dashboard'),
+      BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Users'),
+      BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Courses'),
+      BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
+      BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
     ];
   }
 }

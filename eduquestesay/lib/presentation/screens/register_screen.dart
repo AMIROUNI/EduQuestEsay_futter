@@ -1,3 +1,4 @@
+import 'package:eduquestesay/data/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -179,7 +180,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 });
                                 
                                 // Use the alias here too
-                                User? success = await authProvider.registerWithEmail(
+                                UserModel? success = await authProvider.registerWithEmail(
                                   _email.text,
                                   _password.text,
                                   _fullName.text,
