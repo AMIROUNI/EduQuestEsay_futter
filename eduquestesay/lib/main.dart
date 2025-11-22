@@ -1,4 +1,6 @@
 import 'package:eduquestesay/providers/course_provider.dart';
+import 'package:eduquestesay/providers/enrollment_provider.dart';
+import 'package:eduquestesay/providers/lesson_provider.dart';
 import 'package:eduquestesay/providers/news_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,6 +34,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => CourseProvider()),
         ChangeNotifierProvider(create: (_) => NewsProvider()),
+        ChangeNotifierProvider(create: (_)=> LessonProvider()),
+        ChangeNotifierProvider(create: (context) => EnrollmentProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

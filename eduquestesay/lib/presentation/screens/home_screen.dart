@@ -283,7 +283,17 @@ Widget _buildNewsSlider(BuildContext context) {
     return ListView.builder(
       itemCount: provider.courses.length,
       itemBuilder: (context, index) {
-        return _buildCourseCard(provider.courses[index]);
+        return  GestureDetector(
+          child: _buildCourseCard(provider.courses[index]),
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              '/enrollment',
+              arguments: provider.courses[index],
+            );
+              
+          },
+        );
       },
     );
   }
@@ -303,7 +313,7 @@ Widget _buildNewsSlider(BuildContext context) {
         ),
         leading: course.imageUrl.isNotEmpty
             ? Image.network(
-                course.imageUrl,
+                  course.imageUrl ?? 'https://via.placeholder.com/400x200/3F51B5/FFFFFF?text=No+Image',
                 width: 60,
                 height: 60,
                 fit: BoxFit.cover,

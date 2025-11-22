@@ -2,7 +2,7 @@ class Course {
   final String id;
   final String title;
   final String description;
-  final String teacherId;
+  final String teacherEmail;
   final DateTime createdAt;
   final String imageUrl;
   final double rating;
@@ -13,7 +13,7 @@ class Course {
     required this.id,
     required this.title,
     required this.description,
-    required this.teacherId,
+    required this.teacherEmail,
     required this.createdAt,
     required this.imageUrl,
     required this.rating,
@@ -26,7 +26,7 @@ class Course {
       id: json['id']?.toString() ?? '',
       title: json['title']?.toString() ?? 'No Title',
       description: json['description']?.toString() ?? 'No Description',
-      teacherId: json['teacherId']?.toString() ?? '',
+      teacherEmail: json['teacherId']?.toString() ?? '',
       createdAt: json['createdAt'] != null 
           ? DateTime.parse(json['createdAt'].toString())
           : DateTime.now(),
@@ -44,7 +44,7 @@ class Course {
       'id': id,
       'title': title,
       'description': description,
-      'teacherId': teacherId,
+      'teacherId': teacherEmail,
       'createdAt': createdAt.toIso8601String(),
       'imageUrl': imageUrl,
       'rating': rating,
