@@ -1,8 +1,11 @@
+import 'package:eduquestesay/data/services/teacher_dashboard_service.dart';
 import 'package:eduquestesay/providers/course_provider.dart';
 import 'package:eduquestesay/providers/enrollment_provider.dart';
 import 'package:eduquestesay/providers/lesson_provider.dart';
 import 'package:eduquestesay/providers/news_provider.dart';
+import 'package:eduquestesay/providers/teacher_dashboard_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
@@ -35,7 +38,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CourseProvider()),
         ChangeNotifierProvider(create: (_) => NewsProvider()),
         ChangeNotifierProvider(create: (_)=> LessonProvider()),
-        ChangeNotifierProvider(create: (context) => EnrollmentProvider())
+        ChangeNotifierProvider(create: (context) => EnrollmentProvider()),
+          ChangeNotifierProvider(
+    create: (context) => TeacherDashboardProvider(
+      service: TeacherDashboardService(client: http.Client()),
+    ),)
+      
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -1,14 +1,18 @@
 import 'package:eduquestesay/data/models/course_model.dart';
 import 'package:eduquestesay/presentation/screens/course_detail_screen.dart';
 import 'package:eduquestesay/presentation/screens/enrollment_screen.dart';
+import 'package:eduquestesay/presentation/screens/landing_scren.dart';
 import 'package:eduquestesay/presentation/screens/my_courses_screen.dart';
 import 'package:eduquestesay/presentation/screens/news_screen.dart';
 import 'package:eduquestesay/presentation/screens/profile_screen.dart';
+import 'package:eduquestesay/presentation/screens/teacher/dashboard_screen.dart';
+import 'package:eduquestesay/presentation/screens/teacher/teacher_courses_screen.dart';
 import 'package:flutter/material.dart';
 import '../presentation/screens/login_screen.dart';
 import '../presentation/screens/register_screen.dart';
 import '../presentation/screens/home_screen.dart';
 import '../presentation/screens/auth_wrapper_screen.dart';
+
 
 class AppRouter {
   static const String authWrapper = '/'; 
@@ -20,14 +24,24 @@ class AppRouter {
   static const String mycourses = '/my-courses';
   static const String profile = '/profile';
   static const String news = '/news';
-
-
+  static const String adminDashboard = '/admin';
+  static const String manageUsers = '/admin/users';
+  static const String manageCourses = '/admin/courses';
+  static const String landing = "/landing";
+  static const String teacherDashboard = "/teacher_dashboard";
+  static const String teacherCourses = "/teacher_courses";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case teacherCourses:
+          return MaterialPageRoute(builder: (_) => const TeacherCoursesScreen());
+      case teacherDashboard:
+          return MaterialPageRoute(builder: (_) => const TeacherDashboardScreen());
+      case landing:
+          return MaterialPageRoute(builder: (_) => const LandingScreen());
       case news:
           return MaterialPageRoute(builder: (_) => const NewsScreen());
-          case profile:
+      case profile:
         return MaterialPageRoute(
           builder: (_) => ProfileScreen(),
         );
@@ -53,6 +67,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
       case home:
         return MaterialPageRoute(builder: (_) => const CourseSearchWidget()); // Fixed to HomeScreen
+
       default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(

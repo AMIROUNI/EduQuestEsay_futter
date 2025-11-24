@@ -1,3 +1,4 @@
+import 'package:eduquestesay/presentation/screens/landing_scren.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -87,7 +88,7 @@ class _AuthWrapperScreenState extends State<AuthWrapperScreen> {
       return  const CourseSearchWidget();
     } else {
       print('User is not authenticated, showing login screen');
-      return const LoginScreen();
+      return const LandingScreen();
     }
   }
 }

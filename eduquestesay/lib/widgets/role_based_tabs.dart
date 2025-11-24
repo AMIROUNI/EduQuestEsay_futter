@@ -60,9 +60,10 @@ class RoleBasedTabs extends StatelessWidget {
   List<BottomNavigationBarItem> _teacherTabs() {
     return const [
       BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-      BottomNavigationBarItem(icon: Icon(Icons.school), label: 'My Courses'),
+      BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Courses'),
       BottomNavigationBarItem(icon: Icon(Icons.group), label: 'Students'),
       BottomNavigationBarItem(icon: Icon(Icons.analytics), label: 'Analytics'),
+      BottomNavigationBarItem(icon: Icon(Icons.school), label: 'My Courses'),
       BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
     ];
   }

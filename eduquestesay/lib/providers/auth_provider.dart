@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../data/services/auth_service.dart';
 import '../data/models/user_model.dart'; // Import your UserModel
 
@@ -208,5 +209,42 @@ Future<void> _loadUserFromFirestore(String uid) async {
     }
   }
 
+
+
+  
+  Future<void> loadUserData() async {
+    _isLoading = true;
+    
+    try {
+      final isLoggedIn = await _authService.isUserLoggedIn();
+      
+      if (isLoggedIn) {
+        final savedData = await _authService.getSavedUserData();
+        final userId = savedData['uid'];
+        
+        if (userId != null && userId.isNotEmpty) {
+          // Get user data from Firestore including role
+          final userDoc = await FirebaseFirestore.instance
+              .collection('users')
+              .doc(userId)
+              .get();
+              
+          if (userDoc.exists) {
+            _user = UserModel.fromMap(userDoc.data()!,userId);
+            
+            // Save role to SharedPreferences for quick access
+            final prefs = await SharedPreferences.getInstance();
+            await prefs.setString('user_role', _user!.role);
+            
+            print('User role loaded: ${_user!.role}');
+          }
+        }
+      }
+    } catch (e) {
+      _error = 'Error loading user data: $e';
+    } finally {
+      _isLoading = false;
+    }
+  }
 
 }
