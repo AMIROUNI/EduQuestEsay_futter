@@ -49,7 +49,8 @@ class _TeacherCoursesScreenState extends State<TeacherCoursesScreen> {
 
   void _loadTeacherCourses() {
     final courseProvider = Provider.of<CourseProvider>(context, listen: false);
-    courseProvider.fetchCourses();
+    // Use the new method to fetch teacher-specific courses
+    courseProvider.fetchCoursesByTeacher(_teacherEmail!);
   }
 
   @override
@@ -96,7 +97,8 @@ class _TeacherCoursesScreenState extends State<TeacherCoursesScreen> {
   Widget _buildCoursesContent() {
     return Consumer<CourseProvider>(
       builder: (context, courseProvider, child) {
-        final teacherCourses = _getTeacherCourses(courseProvider.courses);
+        // Use teacherCourses from provider instead of filtering manually
+        final teacherCourses = courseProvider.teacherCourses;
 
         return Column(
           children: [
@@ -104,11 +106,14 @@ class _TeacherCoursesScreenState extends State<TeacherCoursesScreen> {
             _buildHeader(teacherCourses.length),
             
             // Loading or Error States
-            if (courseProvider.isLoading) 
+            if (courseProvider.isLoadingTeacherCourses) 
               const LinearProgressIndicator(),
             
-            if (courseProvider.hasError)
-              _buildErrorWidget(courseProvider.error, courseProvider.clearError),
+            if (courseProvider.hasTeacherCoursesError)
+              _buildErrorWidget(
+                courseProvider.teacherCoursesError, 
+                courseProvider.clearTeacherCoursesError
+              ),
             
             // Courses List
             Expanded(
@@ -224,7 +229,7 @@ class _TeacherCoursesScreenState extends State<TeacherCoursesScreen> {
 
   Widget _buildCoursesList(List<Course> courses, CourseProvider courseProvider) {
     return RefreshIndicator(
-      onRefresh: () async => courseProvider.fetchCourses(),
+      onRefresh: () async => courseProvider.fetchCoursesByTeacher(_teacherEmail!),
       child: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: courses.length,
@@ -320,9 +325,10 @@ class _TeacherCoursesScreenState extends State<TeacherCoursesScreen> {
       runSpacing: 8,
       children: [
         _buildMetaChip(Icons.category, course.category),
+        if (course.level != null && course.level!.isNotEmpty)
+          _buildMetaChip(Icons.school, course.level!),
         _buildMetaChip(Icons.schedule, '${course.duration} hours'),
         _buildMetaChip(Icons.star, '${course.rating} ⭐'),
-        _buildMetaChip(Icons.person, 'Teacher'),
       ],
     );
   }
@@ -425,9 +431,12 @@ class _TeacherCoursesScreenState extends State<TeacherCoursesScreen> {
               ),
               const SizedBox(height: 16),
               _buildDetailItem('Category', course.category),
+              if (course.level != null && course.level!.isNotEmpty)
+                _buildDetailItem('Level', course.level!),
               _buildDetailItem('Duration', '${course.duration} hours'),
               _buildDetailItem('Rating', '${course.rating} ⭐'),
               _buildDetailItem('Teacher', course.teacherEmail),
+              _buildDetailItem('Created', _formatDate(course.createdAt)),
             ],
           ),
         ),
@@ -450,7 +459,7 @@ class _TeacherCoursesScreenState extends State<TeacherCoursesScreen> {
             '$label: ',
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          Text(value),
+          Expanded(child: Text(value)),
         ],
       ),
     );
@@ -461,7 +470,7 @@ class _TeacherCoursesScreenState extends State<TeacherCoursesScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Delete Course'),
-        content: Text('Are you sure you want to delete "${course.title}"?'),
+        content: Text('Are you sure you want to delete "${course.title}"? This action cannot be undone.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -480,19 +489,39 @@ class _TeacherCoursesScreenState extends State<TeacherCoursesScreen> {
     );
   }
 
-  void _deleteCourse(Course course, CourseProvider courseProvider) {
-    // TODO: Implement actual course deletion
-    // For now, just show a message
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Course "${course.title}" deleted'),
-        backgroundColor: Colors.green,
-      ),
-    );
-    _loadTeacherCourses();
+  Future<void> _deleteCourse(Course course, CourseProvider courseProvider) async {
+    try {
+      final success = await courseProvider.deleteCourse(course.id);
+      
+      if (success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Course "${course.title}" deleted successfully'),
+            backgroundColor: Colors.green,
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to delete course: ${courseProvider.error}'),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error deleting course: $e'),
+          backgroundColor: Colors.red,
+          duration: const Duration(seconds: 3),
+        ),
+      );
+    }
   }
 
-  List<Course> _getTeacherCourses(List<Course> allCourses) {
-    return allCourses.where((course) => course.teacherEmail == _teacherEmail).toList();
+  String _formatDate(DateTime date) {
+    return '${date.day}/${date.month}/${date.year}';
   }
 }

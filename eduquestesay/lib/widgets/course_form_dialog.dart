@@ -1,5 +1,7 @@
 // widgets/course_form_dialog.dart
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:eduquestesay/providers/course_provider.dart';
 import 'package:eduquestesay/data/models/course_model.dart';
 
 class CourseFormDialog extends StatefulWidget {
@@ -25,6 +27,9 @@ class _CourseFormDialogState extends State<CourseFormDialog> {
   final _categoryController = TextEditingController();
   final _durationController = TextEditingController();
   final _imageUrlController = TextEditingController();
+  final _levelController = TextEditingController();
+
+  bool _isSaving = false;
 
   final List<String> _categories = [
     'Mobile Development',
@@ -39,6 +44,13 @@ class _CourseFormDialogState extends State<CourseFormDialog> {
     'Language',
   ];
 
+  final List<String> _levels = [
+    'Beginner',
+    'Intermediate',
+    'Advanced',
+    'All Levels'
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -48,6 +60,9 @@ class _CourseFormDialogState extends State<CourseFormDialog> {
       _categoryController.text = widget.course!.category;
       _durationController.text = widget.course!.duration.toString();
       _imageUrlController.text = widget.course!.imageUrl;
+      _levelController.text = widget.course!.level ?? 'Beginner';
+    } else {
+      _levelController.text = 'Beginner';
     }
   }
 
@@ -58,6 +73,7 @@ class _CourseFormDialogState extends State<CourseFormDialog> {
     _categoryController.dispose();
     _durationController.dispose();
     _imageUrlController.dispose();
+    _levelController.dispose();
     super.dispose();
   }
 
@@ -74,7 +90,7 @@ class _CourseFormDialogState extends State<CourseFormDialog> {
               TextFormField(
                 controller: _titleController,
                 decoration: const InputDecoration(
-                  labelText: 'Course Title',
+                  labelText: 'Course Title *',
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
@@ -88,7 +104,7 @@ class _CourseFormDialogState extends State<CourseFormDialog> {
               TextFormField(
                 controller: _descriptionController,
                 decoration: const InputDecoration(
-                  labelText: 'Description',
+                  labelText: 'Description *',
                   border: OutlineInputBorder(),
                 ),
                 maxLines: 3,
@@ -103,7 +119,7 @@ class _CourseFormDialogState extends State<CourseFormDialog> {
               DropdownButtonFormField<String>(
                 value: _categoryController.text.isEmpty ? null : _categoryController.text,
                 decoration: const InputDecoration(
-                  labelText: 'Category',
+                  labelText: 'Category *',
                   border: OutlineInputBorder(),
                 ),
                 items: _categories.map((String category) {
@@ -125,10 +141,35 @@ class _CourseFormDialogState extends State<CourseFormDialog> {
                 },
               ),
               const SizedBox(height: 16),
+              DropdownButtonFormField<String>(
+                value: _levelController.text,
+                decoration: const InputDecoration(
+                  labelText: 'Level *',
+                  border: OutlineInputBorder(),
+                ),
+                items: _levels.map((String level) {
+                  return DropdownMenuItem<String>(
+                    value: level,
+                    child: Text(level),
+                  );
+                }).toList(),
+                onChanged: (String? value) {
+                  setState(() {
+                    _levelController.text = value ?? 'Beginner';
+                  });
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please select a level';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: _durationController,
                 decoration: const InputDecoration(
-                  labelText: 'Duration (hours)',
+                  labelText: 'Duration (hours) *',
                   border: OutlineInputBorder(),
                 ),
                 keyboardType: TextInputType.number,
@@ -148,6 +189,7 @@ class _CourseFormDialogState extends State<CourseFormDialog> {
                 decoration: const InputDecoration(
                   labelText: 'Image URL (optional)',
                   border: OutlineInputBorder(),
+                  hintText: 'https://example.com/image.jpg',
                 ),
               ),
             ],
@@ -156,45 +198,86 @@ class _CourseFormDialogState extends State<CourseFormDialog> {
       ),
       actions: [
         TextButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: _isSaving ? null : () => Navigator.pop(context),
           child: const Text('Cancel'),
         ),
         ElevatedButton(
-          onPressed: _saveCourse,
-          child: const Text('Save'),
+          onPressed: _isSaving ? null : _saveCourse,
+          child: _isSaving 
+              ? const SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              : const Text('Save'),
         ),
       ],
     );
   }
 
-  void _saveCourse() {
+  Future<void> _saveCourse() async {
     if (_formKey.currentState!.validate()) {
-      // TODO: Implement actual course saving to backend
-      final course = Course(
-        id: widget.course?.id ?? DateTime.now().millisecondsSinceEpoch.toString(),
-        title: _titleController.text,
-        description: _descriptionController.text,
-        teacherEmail: widget.teacherEmail,
-        createdAt: widget.course?.createdAt ?? DateTime.now(),
-        imageUrl: _imageUrlController.text,
-        rating: widget.course?.rating ?? 0.0,
-        category: _categoryController.text,
-        duration: int.parse(_durationController.text),
-      );
+      setState(() {
+        _isSaving = true;
+      });
 
-      // Show success message
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(widget.course == null 
-              ? 'Course "${course.title}" created successfully!'
-              : 'Course "${course.title}" updated successfully!'
+      try {
+        final courseProvider = Provider.of<CourseProvider>(context, listen: false);
+        
+        final course = Course(
+          id: widget.course?.id ?? '0', // Backend will generate ID
+          title: _titleController.text,
+          description: _descriptionController.text,
+          teacherEmail: widget.teacherEmail,
+          createdAt: widget.course?.createdAt ?? DateTime.now(),
+          imageUrl: _imageUrlController.text,
+          rating: widget.course?.rating ?? 0.0,
+          category: _categoryController.text,
+          duration: int.parse(_durationController.text),
+          level: _levelController.text,
+        );
+
+        bool success;
+        if (widget.course == null) {
+          success = await courseProvider.createCourse(course);
+        } else {
+          success = await courseProvider.updateCourse(course);
+        }
+
+        if (success) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(widget.course == null 
+                  ? 'Course "${course.title}" created successfully!'
+                  : 'Course "${course.title}" updated successfully!'
+              ),
+              backgroundColor: Colors.green,
+            ),
+          );
+          Navigator.pop(context);
+          widget.onSave();
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Failed to save course: ${courseProvider.error}'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error saving course: $e'),
+            backgroundColor: Colors.red,
           ),
-          backgroundColor: Colors.green,
-        ),
-      );
-
-      Navigator.pop(context);
-      widget.onSave();
+        );
+      } finally {
+        if (mounted) {
+          setState(() {
+            _isSaving = false;
+          });
+        }
+      }
     }
   }
 }

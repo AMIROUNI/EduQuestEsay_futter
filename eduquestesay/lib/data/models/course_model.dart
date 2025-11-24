@@ -8,6 +8,7 @@ class Course {
   final double rating;
   final String category;
   final int duration;
+  final String level ; 
 
   Course({
     required this.id,
@@ -19,14 +20,16 @@ class Course {
     required this.rating,
     required this.category,
     required this.duration,
+    required this.level
   });
 
   factory Course.fromJson(Map<String, dynamic> json) {
     return Course(
       id: json['id']?.toString() ?? '',
+      level: json['level']?.toString() ?? '' ,
       title: json['title']?.toString() ?? 'No Title',
       description: json['description']?.toString() ?? 'No Description',
-      teacherEmail: json['teacherId']?.toString() ?? '',
+      teacherEmail: json['teacherEmail']?.toString() ?? '',
       createdAt: json['createdAt'] != null 
           ? DateTime.parse(json['createdAt'].toString())
           : DateTime.now(),
@@ -44,12 +47,13 @@ class Course {
       'id': id,
       'title': title,
       'description': description,
-      'teacherId': teacherEmail,
+      'teacherEmail': teacherEmail,
       'createdAt': createdAt.toIso8601String(),
       'imageUrl': imageUrl,
       'rating': rating,
       'category': category,
       'duration': duration,
+      'level': level,
     };
   }
 }
