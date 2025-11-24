@@ -53,4 +53,9 @@ public class CourseService {
     public List<Course> searchCoursesByTitle(String title) {
         return courseRepository.findByTitleContainingIgnoreCase(title);
     }
+
+    public List<Course> getEnrollmentCousesByStudentEmail(String  studentEmail) {
+
+        return   courseRepository.findEnrollmentCoursesByStudentEmail(studentEmail);
+    }
 }

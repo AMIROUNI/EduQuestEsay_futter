@@ -275,6 +275,7 @@ public class DataSeeder implements CommandLineRunner {
 
         News n1 = new News();
         n1.setTitle("🚀 New Flutter Course Released!");
+        n1.setCategory("Course");
         n1.setDescription("A full Flutter & Dart bootcamp is now available with 30+ hours of content.");
         n1.setImageUrl("https://images.unsplash.com/photo-1581276879432-15a61d7b5a37?w=800");
         n1.setLink("https://eduquest.com/flutter");
@@ -283,6 +284,7 @@ public class DataSeeder implements CommandLineRunner {
         News n2 = new News();
         n2.setTitle("🔥 50% Discount on All Web Development Courses");
         n2.setDescription("Limited-time offer for all full-stack web development paths.");
+        n2.setCategory("Web Development");
         n2.setImageUrl("https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800");
         n2.setLink("https://eduquest.com/offers");
         n2.setCreatedAt(LocalDateTime.now());
@@ -291,11 +293,13 @@ public class DataSeeder implements CommandLineRunner {
         n3.setTitle("📢 New AI / Machine Learning Track Added");
         n3.setDescription("Learn TensorFlow, PyTorch, NLP, and Computer Vision in our new ML track.");
         n3.setImageUrl("https://images.unsplash.com/photo-1508385082359-f38ae991e8f2?w=800");
+        n3.setCategory("AI news");
         n3.setLink("https://eduquest.com/ai-track");
         n3.setCreatedAt(LocalDateTime.now());
 
         News n4 = new News();
         n4.setTitle("🎓 Become a Certified Java Spring Boot Developer");
+        n4.setCategory("Development");
         n4.setDescription("New Spring Boot certification path now open for registration.");
         n4.setImageUrl("https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800");
         n4.setLink("https://eduquest.com/spring-boot");

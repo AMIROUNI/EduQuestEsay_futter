@@ -24,6 +24,8 @@ public class News {
 
     private LocalDateTime createdAt;
 
+    private String category ;
+
     @PrePersist
     public void prePersist() {
         createdAt = LocalDateTime.now();

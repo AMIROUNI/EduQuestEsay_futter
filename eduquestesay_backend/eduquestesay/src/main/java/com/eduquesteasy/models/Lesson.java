@@ -1,28 +1,34 @@
-package com.eduquesteasy.models;
+    package com.eduquesteasy.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import lombok.Data;
+    import com.fasterxml.jackson.annotation.JsonBackReference;
+    import com.fasterxml.jackson.annotation.JsonIgnore;
+    import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+    import com.fasterxml.jackson.annotation.JsonManagedReference;
+    import jakarta.persistence.*;
+    import lombok.Data;
 
-@Data
-@Entity
-@Table(name = "lessons")
-public class    Lesson {
+    @Data
+    @Entity
+    @Table(name = "lessons")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public class    Lesson {
 
-    private String title;
-    private String content;
-    private String videoUrl;
-    private String pdfFile;
-    private int orderIndex;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "course_id")
-    @JsonIgnore
-    private Course course;
+        private String title;
+        private String content;
+        private String videoUrl;
+        private String pdfFile;
+        private int orderIndex;
+
+        @ManyToOne
+        @JoinColumn(name = "course_id")
+        @JsonIgnore
+        @JsonBackReference // Add this
+        private Course course;
 
 
-}
+    }
