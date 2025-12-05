@@ -57,7 +57,7 @@ class TabNavigationHandler {
       case 1:
         return AppRouter.home;
       case 2:
-        return AppRouter.home;
+        return AppRouter.teacherStudent;
       case 3:
         return AppRouter.teacherDashboard;
       case 4 : 

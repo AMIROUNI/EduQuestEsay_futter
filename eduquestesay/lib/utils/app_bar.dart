@@ -1,4 +1,5 @@
- import 'package:eduquestesay/providers/auth_provider.dart';
+ import 'package:eduquestesay/presentation/screens/login_screen.dart';
+import 'package:eduquestesay/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -51,6 +52,10 @@ AppBar buildAppBar(BuildContext context) {
                 Navigator.pushNamed(context, '/profile');
               } else if (value == 'logout') {
                 authProvider.signOut();
+               Navigator.pushReplacement(
+  context,
+  MaterialPageRoute(builder: (context) => LoginScreen()),
+);
               }
             },
             shape: RoundedRectangleBorder(

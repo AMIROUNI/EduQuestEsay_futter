@@ -24,6 +24,9 @@ class _LoginScreenState extends State<LoginScreen> {
     final authProvider = Provider.of<my_providers.AuthProvider>(context, listen: false);
 
     return Scaffold(
+      appBar: AppBar(
+          leading: Container(),
+      ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
@@ -48,10 +51,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 80,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        color: Colors.purple.shade50,
+                        color: Colors.blue.shade50,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.purple.withOpacity(0.1),
+                            color: Colors.blue.withOpacity(0.1),
                             blurRadius: 10,
                             offset: const Offset(0, 4),
                           ),
@@ -66,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             return Icon(
                               Icons.school,
                               size: 40,
-                              color: Colors.purple.shade700,
+                              color: Colors.blue.shade700,
                             );
                           },
                         ),
@@ -137,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Text(
                               'Forgot Password?',
                               style: TextStyle(
-                                color: Colors.purple.shade700,
+                                color: Colors.blue.shade700,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 14,
                               ),
@@ -174,13 +177,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                     }
                                   },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.purple.shade700,
+                              backgroundColor: Colors.blue.shade600,
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 18),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(12),
                               ),
-                              elevation: 0,
+                              elevation: 4,
+                              shadowColor: Colors.blue.withOpacity(0.3),
                             ),
                             child: _isLoading
                                 ? const SizedBox(
@@ -244,10 +248,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                   },
                             style: OutlinedButton.styleFrom(
                               foregroundColor: Colors.black,
+                              backgroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 16),
-                              side: BorderSide(color: Colors.grey.shade400),
+                              side: BorderSide(color: Colors.blue.shade300, width: 2),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(12),
                               ),
                             ),
                             child: Row(
@@ -291,7 +296,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   TextSpan(
                                     text: 'Sign up',
                                     style: TextStyle(
-                                      color: Colors.purple.shade700,
+                                      color: Colors.blue.shade700,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 15,
                                     ),
@@ -322,7 +327,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey.shade300, width: 1.5),
       ),
       child: TextFormField(
@@ -350,7 +355,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey.shade300, width: 1.5),
       ),
       child: TextFormField(

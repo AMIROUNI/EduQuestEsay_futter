@@ -4,6 +4,7 @@ import 'package:eduquestesay/providers/lesson_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
 class CourseDetailsScreen extends StatelessWidget {
   final Course course;
 

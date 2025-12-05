@@ -70,6 +70,28 @@ class EnrollmentService {
     }
   }
 
+
+    // Get enrollments by student email
+  Future<List<Enrollment>> getEnrollmentsByTeacher(String email) async {
+    try {
+      final response = await http.get(
+        Uri.parse('$baseUrl/teacher/$email'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final List<dynamic> jsonResponse = json.decode(response.body);
+        return jsonResponse.map((json) => Enrollment.fromJson(json)).toList();
+      } else {
+        throw Exception('Failed to load student enrollments. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to load student enrollments: $e');
+    }
+  }
+
   // Get enrollments by course ID
   Future<List<Enrollment>> getEnrollmentsByCourse(String courseId) async {
     try {

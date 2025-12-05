@@ -8,6 +8,10 @@ import 'package:eduquestesay/providers/course_provider.dart';
 import 'package:eduquestesay/data/models/course_model.dart';
 import 'package:eduquestesay/utils/app_bar.dart';
 
+// IMPORTS AJOUTÉS
+import 'package:eduquestesay/widgets/role_based_tabs.dart';
+import 'package:eduquestesay/utils/tab_navigation_handler.dart';
+
 class TeacherCoursesScreen extends StatefulWidget {
   const TeacherCoursesScreen({super.key});
 
@@ -18,6 +22,9 @@ class TeacherCoursesScreen extends StatefulWidget {
 class _TeacherCoursesScreenState extends State<TeacherCoursesScreen> {
   String? _teacherEmail;
   bool _isLoadingUser = true;
+
+  // --- état pour la tab sélectionnée ---
+  int _currentTabIndex = 0;
 
   @override
   void initState() {
@@ -69,6 +76,20 @@ class _TeacherCoursesScreenState extends State<TeacherCoursesScreen> {
               child: const Icon(Icons.add, color: Colors.white),
             )
           : null,
+
+      // --------- AJOUT: Bottom Navigation basé sur le rôle ----------
+      bottomNavigationBar: RoleBasedTabs(
+        currentIndex: _currentTabIndex,
+        onTabChanged: (index) {
+          // Mettre à jour l'index local pour l'état visuel
+          setState(() {
+            _currentTabIndex = index;
+          });
+
+          // Gérer la navigation selon le rôle et l'index (supprime la pile)
+          TabNavigationHandler.handleTabChange(context, index);
+        },
+      ),
     );
   }
 
@@ -471,6 +492,7 @@ class _TeacherCoursesScreenState extends State<TeacherCoursesScreen> {
       builder: (context) => AlertDialog(
         title: const Text('Delete Course'),
         content: Text('Are you sure you want to delete "${course.title}"? This action cannot be undone.'),
+
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),

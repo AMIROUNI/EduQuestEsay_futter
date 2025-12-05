@@ -1,8 +1,7 @@
 import 'package:eduquestesay/data/models/user_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../providers/auth_provider.dart' as my_providers; // <-- Add alias
+import '../../../providers/auth_provider.dart' as my_providers;
 import '../../../core/app_router.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -21,56 +20,82 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String _selectedRole = 'Student';
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
+  bool _isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
-    // Use the alias here
     final authProvider = Provider.of<my_providers.AuthProvider>(context, listen: false);
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text(
-          'Create Account',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-          ),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Form(
             key: _formKey,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Join Us Today',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back, color: Colors.black),
+                    onPressed: () => Navigator.pop(context),
                   ),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  'Create your account to get started',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey.shade600,
-                  ),
+                const SizedBox(height: 20),
+
+                Column(
+                  children: [
+                    Container(
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: Colors.blue.shade50,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.blue.withOpacity(0.1),
+                            blurRadius: 10,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Image.asset(
+                          'assets/images/logo.png',
+                          width: 50,
+                          height: 50,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Icon(
+                              Icons.school,
+                              size: 40,
+                              color: Colors.blue.shade700,
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    const Text(
+                      'Create Account',
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Join EduQuest to start your learning journey',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey.shade600,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 32),
+                const SizedBox(height: 40),
 
                 Expanded(
                   child: SingleChildScrollView(
@@ -105,13 +130,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         const SizedBox(height: 20),
 
-                        _buildTextField(
+                        _buildPasswordField(
                           controller: _password,
                           label: 'Password',
                           icon: Icons.lock_outline,
-                          obscureText: true,
                           validator: (value) {
-                            if (value == null || value.length < 6) {
+                            if (value == null || value.isEmpty) {
+                              return 'Password is required';
+                            }
+                            if (value.length < 6) {
                               return 'Password must be at least 6 characters';
                             }
                             return null;
@@ -123,6 +150,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           controller: _phoneNumber,
                           label: 'Phone Number',
                           icon: Icons.phone_outlined,
+                          keyboardType: TextInputType.phone,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Phone number is required';
@@ -135,25 +163,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         const SizedBox(height: 20),
 
+                        // Role Selection
                         Container(
                           decoration: BoxDecoration(
-                            color: Colors.grey.shade50,
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: Colors.grey.shade300),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: Colors.grey.shade300, width: 1.5),
                           ),
                           child: DropdownButtonFormField<String>(
                             decoration: const InputDecoration(
-                              labelText: 'Role',
+                              labelText: 'Select Role',
                               border: InputBorder.none,
-                              contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                              contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                               prefixIcon: Icon(Icons.people_outline, color: Colors.grey),
                             ),
                             value: _selectedRole,
-                            style: const TextStyle(color: Colors.black),
+                            style: const TextStyle(color: Colors.black, fontSize: 16),
                             dropdownColor: Colors.white,
+                            icon: Icon(Icons.arrow_drop_down, color: Colors.grey.shade500),
                             items: const [
-                              DropdownMenuItem(value: 'Teacher', child: Text('Teacher')),
-                              DropdownMenuItem(value: 'Student', child: Text('Student')),
+                              DropdownMenuItem(
+                                value: 'Student',
+                                child: Text('Student'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'Teacher',
+                                child: Text('Teacher'),
+                              ),
                             ],
                             onChanged: (value) {
                               setState(() {
@@ -170,16 +206,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         const SizedBox(height: 32),
 
+                        // Create Account Button
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: _isLoading ? null : () async {
                               if (_formKey.currentState!.validate()) {
-                                setState(() {
-                                  _isLoading = true;
-                                });
+                                setState(() => _isLoading = true);
                                 
-                                // Use the alias here too
                                 UserModel? success = await authProvider.registerWithEmail(
                                   _email.text,
                                   _password.text,
@@ -188,23 +222,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   _selectedRole,
                                 );
                                 
-                                setState(() {
-                                  _isLoading = false;
-                                });
+                                if (!mounted) return;
+                                
+                                setState(() => _isLoading = false);
 
-                                if (success != null && mounted) {
+                                if (success != null) {
                                   Navigator.pushReplacementNamed(context, AppRouter.login);
                                 }
                               }
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.purple.shade700,
+                              backgroundColor: Colors.blue.shade600,
                               foregroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              padding: const EdgeInsets.symmetric(vertical: 18),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(12),
                               ),
-                              elevation: 0,
+                              elevation: 4,
+                              shadowColor: Colors.blue.withOpacity(0.3),
                             ),
                             child: _isLoading 
                                 ? const SizedBox(
@@ -224,8 +259,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                           ),
                         ),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 32),
 
+                        // Login Link
                         Center(
                           child: GestureDetector(
                             onTap: _isLoading ? null : () => Navigator.pushReplacementNamed(
@@ -235,13 +271,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             child: RichText(
                               text: TextSpan(
                                 text: 'Already have an account? ',
-                                style: TextStyle(color: Colors.grey.shade600),
-                                children: const [
+                                style: TextStyle(
+                                  color: Colors.grey.shade600,
+                                  fontSize: 15,
+                                ),
+                                children: [
                                   TextSpan(
                                     text: 'Login',
                                     style: TextStyle(
-                                      color: Colors.purple,
+                                      color: Colors.blue.shade700,
                                       fontWeight: FontWeight.bold,
+                                      fontSize: 15,
                                     ),
                                   ),
                                 ],
@@ -266,27 +306,75 @@ class _RegisterScreenState extends State<RegisterScreen> {
     required String label,
     required IconData icon,
     required String? Function(String?) validator,
-    bool obscureText = false,
+    TextInputType keyboardType = TextInputType.text,
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.grey.shade300),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.grey.shade300, width: 1.5),
       ),
       child: TextFormField(
         controller: controller,
-        obscureText: obscureText,
-        style: const TextStyle(color: Colors.black),
+        keyboardType: keyboardType,
+        style: const TextStyle(fontSize: 16, color: Colors.black),
         decoration: InputDecoration(
           labelText: label,
           labelStyle: TextStyle(color: Colors.grey.shade600),
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
           prefixIcon: Icon(icon, color: Colors.grey.shade500),
+          floatingLabelBehavior: FloatingLabelBehavior.never,
         ),
         validator: validator,
       ),
     );
+  }
+
+  Widget _buildPasswordField({
+    required TextEditingController controller,
+    required String label,
+    required IconData icon,
+    required String? Function(String?) validator,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.grey.shade300, width: 1.5),
+      ),
+      child: TextFormField(
+        controller: controller,
+        obscureText: !_isPasswordVisible,
+        style: const TextStyle(fontSize: 16, color: Colors.black),
+        decoration: InputDecoration(
+          labelText: label,
+          labelStyle: TextStyle(color: Colors.grey.shade600),
+          border: InputBorder.none,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+          prefixIcon: Icon(icon, color: Colors.grey.shade500),
+          suffixIcon: IconButton(
+            icon: Icon(
+              _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+              color: Colors.grey.shade500,
+            ),
+            onPressed: () => setState(() {
+              _isPasswordVisible = !_isPasswordVisible;
+            }),
+          ),
+          floatingLabelBehavior: FloatingLabelBehavior.never,
+        ),
+        validator: validator,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _email.dispose();
+    _password.dispose();
+    _fullName.dispose();
+    _phoneNumber.dispose();
+    super.dispose();
   }
 }

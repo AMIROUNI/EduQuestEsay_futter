@@ -6,6 +6,7 @@ import 'package:eduquestesay/presentation/screens/my_courses_screen.dart';
 import 'package:eduquestesay/presentation/screens/news_screen.dart';
 import 'package:eduquestesay/presentation/screens/profile_screen.dart';
 import 'package:eduquestesay/presentation/screens/teacher/dashboard_screen.dart';
+import 'package:eduquestesay/presentation/screens/teacher/student_screen.dart';
 import 'package:eduquestesay/presentation/screens/teacher/teacher_courses_screen.dart';
 import 'package:flutter/material.dart';
 import '../presentation/screens/login_screen.dart';
@@ -30,9 +31,12 @@ class AppRouter {
   static const String landing = "/landing";
   static const String teacherDashboard = "/teacher_dashboard";
   static const String teacherCourses = "/teacher_courses";
+  static const  String  teacherStudent = "/teacherStudent";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case teacherStudent:
+          return MaterialPageRoute(builder: (_) =>  StudentScreen());
       case teacherCourses:
           return MaterialPageRoute(builder: (_) => const TeacherCoursesScreen());
       case teacherDashboard:
@@ -66,7 +70,7 @@ class AppRouter {
       case register:
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
       case home:
-        return MaterialPageRoute(builder: (_) => const CourseSearchWidget()); // Fixed to HomeScreen
+        return MaterialPageRoute(builder: (_) => const CourseSearchWidget()); 
 
       default:
         return MaterialPageRoute(

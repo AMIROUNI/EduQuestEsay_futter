@@ -65,16 +65,35 @@ class EnrollmentProvider with ChangeNotifier {
 
     try {
       _studentEnrollments = await _enrollmentService.getEnrollmentsByStudent(email);
-      print("✅ Loaded ${_studentEnrollments.length} enrollments for student: $email");
+      print(" Loaded ${_studentEnrollments.length} enrollments for student: $email");
       _isLoading = false;
       notifyListeners();
     } catch (e) {
       _error = e.toString();
-      print("❌ Error fetching student enrollments: $e");
+      print(" Error fetching student enrollments: $e");
       _isLoading = false;
       notifyListeners();
     }
   }
+
+   Future<void> fetchTeacherEnrollments(String email) async {
+    _isLoading = true;
+    _error = '';
+    notifyListeners();
+
+    try {
+      _studentEnrollments = await _enrollmentService.getEnrollmentsByTeacher(email);
+      print(" Loaded ${_studentEnrollments.length} enrollments for student: $email");
+      _isLoading = false;
+      notifyListeners();
+    } catch (e) {
+      _error = e.toString();
+      print(" Error fetching student enrollments: $e");
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
 
   // Get enrollments by course
   Future<List<Enrollment>> fetchCourseEnrollments(String courseId) async {
