@@ -38,7 +38,7 @@ class CourseProvider with ChangeNotifier {
   bool get hasEnrolledError => _enrolledError.isNotEmpty;
   bool get hasTeacherCoursesError => _teacherCoursesError.isNotEmpty;
 
-  // 🔹 Get all courses
+  //  Get all courses
   Future<void> fetchCourses() async {
     _isLoading = true;
     _error = '';
@@ -47,17 +47,17 @@ class CourseProvider with ChangeNotifier {
     try {
       _courses = await _courseService.fetchCourses();
       _filteredCourses = [];
-      print("✅ Loaded ${_courses.length} courses in provider");
+      print(" Loaded ${_courses.length} courses in provider");
     } catch (e) {
       _error = e.toString();
-      print("❌ Error in provider: $e");
+      print(" Error in provider: $e");
     } finally {
       _isLoading = false;
       notifyListeners();
     }
   }
 
-  // 🔹 Get course by ID
+  //  Get course by ID
   Future<void> fetchCourseById(int id) async {
     _isLoading = true;
     _error = '';
@@ -70,14 +70,14 @@ class CourseProvider with ChangeNotifier {
       }
     } catch (e) {
       _error = e.toString();
-      print("❌ Error fetching course by ID: $e");
+      print(" Error fetching course by ID: $e");
     } finally {
       _isLoading = false;
       notifyListeners();
     }
   }
 
-  // 🔹 Create new course
+  //  Create new course
   Future<bool> createCourse(Course course) async {
     _isLoading = true;
     _error = '';
@@ -86,11 +86,11 @@ class CourseProvider with ChangeNotifier {
     try {
       final createdCourse = await _courseService.createCourse(course);
       _courses.add(createdCourse);
-      print("✅ Course added to local list: ${createdCourse.title}");
+      print(" Course added to local list: ${createdCourse.title}");
       return true;
     } catch (e) {
       _error = e.toString();
-      print("❌ Error creating course in provider: $e");
+      print(" Error creating course in provider: $e");
       return false;
     } finally {
       _isLoading = false;
@@ -98,7 +98,7 @@ class CourseProvider with ChangeNotifier {
     }
   }
 
-  // 🔹 Update course
+  //  Update course
   Future<bool> updateCourse(Course course) async {
     _isLoading = true;
     _error = '';
@@ -110,11 +110,11 @@ class CourseProvider with ChangeNotifier {
       if (index != -1) {
         _courses[index] = updatedCourse;
       }
-      print("✅ Course updated in local list: ${updatedCourse.title}");
+      print(" Course updated in local list: ${updatedCourse.title}");
       return true;
     } catch (e) {
       _error = e.toString();
-      print("❌ Error updating course in provider: $e");
+      print(" Error updating course in provider: $e");
       return false;
     } finally {
       _isLoading = false;
@@ -122,7 +122,7 @@ class CourseProvider with ChangeNotifier {
     }
   }
 
-  // 🔹 Delete course
+  //  Delete course
   Future<bool> deleteCourse(String courseId) async {
     _isLoading = true;
     _error = '';
@@ -132,11 +132,11 @@ class CourseProvider with ChangeNotifier {
       await _courseService.deleteCourse(courseId);
       _courses.removeWhere((course) => course.id == courseId);
       _teacherCourses.removeWhere((course) => course.id == courseId);
-      print("✅ Course deleted from local list: $courseId");
+      print(" Course deleted from local list: $courseId");
       return true;
     } catch (e) {
       _error = e.toString();
-      print("❌ Error deleting course in provider: $e");
+      print(" Error deleting course in provider: $e");
       return false;
     } finally {
       _isLoading = false;
@@ -144,7 +144,7 @@ class CourseProvider with ChangeNotifier {
     }
   }
 
-  // 🔹 Get courses by category
+  //  Get courses by category
   Future<void> fetchCoursesByCategory(String category) async {
     _isLoading = true;
     _error = '';
@@ -153,17 +153,17 @@ class CourseProvider with ChangeNotifier {
     try {
       _courses = await _courseService.getCoursesByCategory(category);
       _filteredCourses = [];
-      print("✅ Loaded ${_courses.length} courses in category: $category");
+      print(" Loaded ${_courses.length} courses in category: $category");
     } catch (e) {
       _error = e.toString();
-      print("❌ Error fetching courses by category: $e");
+      print(" Error fetching courses by category: $e");
     } finally {
       _isLoading = false;
       notifyListeners();
     }
   }
 
-  // 🔹 Get courses by level
+  //  Get courses by level
   Future<void> fetchCoursesByLevel(String level) async {
     _isLoading = true;
     _error = '';
@@ -172,17 +172,17 @@ class CourseProvider with ChangeNotifier {
     try {
       _courses = await _courseService.getCoursesByLevel(level);
       _filteredCourses = [];
-      print("✅ Loaded ${_courses.length} courses with level: $level");
+      print(" Loaded ${_courses.length} courses with level: $level");
     } catch (e) {
       _error = e.toString();
-      print("❌ Error fetching courses by level: $e");
+      print(" Error fetching courses by level: $e");
     } finally {
       _isLoading = false;
       notifyListeners();
     }
   }
 
-  // 🔹 Get courses by teacher
+  //  Get courses by teacher
   Future<void> fetchCoursesByTeacher(String teacherEmail) async {
     _isLoadingTeacherCourses = true;
     _teacherCoursesError = '';
@@ -190,17 +190,17 @@ class CourseProvider with ChangeNotifier {
 
     try {
       _teacherCourses = await _courseService.getCoursesByTeacher(teacherEmail);
-      print("✅ Loaded ${_teacherCourses.length} courses for teacher: $teacherEmail");
+      print(" Loaded ${_teacherCourses.length} courses for teacher: $teacherEmail");
     } catch (e) {
       _teacherCoursesError = e.toString();
-      print("❌ Error fetching teacher courses: $e");
+      print(" Error fetching teacher courses: $e");
     } finally {
       _isLoadingTeacherCourses = false;
       notifyListeners();
     }
   }
 
-  // 🔹 Search courses by title
+  //  Search courses by title
   Future<void> searchCourses(String title) async {
     _isLoading = true;
     _error = '';
@@ -211,11 +211,11 @@ class CourseProvider with ChangeNotifier {
         _filteredCourses = [];
       } else {
         _filteredCourses = await _courseService.searchCourses(title);
-        print("✅ Found ${_filteredCourses.length} courses matching: $title");
+        print(" Found ${_filteredCourses.length} courses matching: $title");
       }
     } catch (e) {
       _error = e.toString();
-      print("❌ Error searching courses: $e");
+      print(" Error searching courses: $e");
       
       // Fallback to local search if API fails
       _filteredCourses = _courses.where((course) {
@@ -230,7 +230,7 @@ class CourseProvider with ChangeNotifier {
     }
   }
 
-  // 🔹 Get enrolled courses for a student
+  //  Get enrolled courses for a student
   Future<void> fetchEnrolledCourses(String studentEmail) async {
     _isLoadingEnrolled = true;
     _enrolledError = '';
@@ -238,10 +238,10 @@ class CourseProvider with ChangeNotifier {
 
     try {
       _enrolledCourses = await _courseService.fetchEnrolledCourses(studentEmail);
-      print("✅ Loaded ${_enrolledCourses.length} enrolled courses in provider");
+      print(" Loaded ${_enrolledCourses.length} enrolled courses in provider");
     } catch (e) {
       _enrolledError = e.toString();
-      print("❌ Error fetching enrolled courses in provider: $e");
+      print(" Error fetching enrolled courses in provider: $e");
     } finally {
       _isLoadingEnrolled = false;
       notifyListeners();

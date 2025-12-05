@@ -1,9 +1,11 @@
+import 'package:eduquestesay/core/config.dart';
 import 'package:eduquestesay/data/services/teacher_dashboard_service.dart';
 import 'package:eduquestesay/providers/course_provider.dart';
 import 'package:eduquestesay/providers/enrollment_provider.dart';
 import 'package:eduquestesay/providers/lesson_provider.dart';
 import 'package:eduquestesay/providers/news_provider.dart';
 import 'package:eduquestesay/providers/teacher_dashboard_provider.dart';
+import 'package:eduquestesay/providers/chat_provider.dart'; // Add this import
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -16,10 +18,7 @@ import 'presentation/screens/login_screen.dart';
 import 'presentation/screens/home_screen.dart';
 import 'data/models/user_model.dart';
 
-
 import 'package:google_sign_in/google_sign_in.dart';
-
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,20 +36,25 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => CourseProvider()),
         ChangeNotifierProvider(create: (_) => NewsProvider()),
-        ChangeNotifierProvider(create: (_)=> LessonProvider()),
+        ChangeNotifierProvider(create: (_) => LessonProvider()),
         ChangeNotifierProvider(create: (context) => EnrollmentProvider()),
-          ChangeNotifierProvider(
-    create: (context) => TeacherDashboardProvider(
-      service: TeacherDashboardService(client: http.Client()),
-    ),)
-      
+        ChangeNotifierProvider(
+          create: (context) => TeacherDashboardProvider(
+            service: TeacherDashboardService(client: http.Client()),
+          ),
+        ),
+        // Add Gemini Chat Provider
+        ChangeNotifierProvider(
+          create: (_) => GeminiChatProvider(
+            apiKey: AppConfig.geminiApiKey, // Replace with your actual API key
+          ),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'E-Learning Auth',
         initialRoute: AppRouter.authWrapper,
         onGenerateRoute: AppRouter.generateRoute,
-        
       ),
     );
   }
@@ -64,7 +68,7 @@ class AuthWrapper extends StatelessWidget {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
 
     return StreamBuilder<firebase_auth.User?>(
-      stream:   authProvider.userStream, 
+      stream: authProvider.userStream,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(

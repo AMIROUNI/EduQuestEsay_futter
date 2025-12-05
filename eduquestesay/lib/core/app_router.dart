@@ -8,6 +8,7 @@ import 'package:eduquestesay/presentation/screens/profile_screen.dart';
 import 'package:eduquestesay/presentation/screens/teacher/dashboard_screen.dart';
 import 'package:eduquestesay/presentation/screens/teacher/student_screen.dart';
 import 'package:eduquestesay/presentation/screens/teacher/teacher_courses_screen.dart';
+import 'package:eduquestesay/widgets/gemini_chatbot.dart';
 import 'package:flutter/material.dart';
 import '../presentation/screens/login_screen.dart';
 import '../presentation/screens/register_screen.dart';
@@ -32,9 +33,12 @@ class AppRouter {
   static const String teacherDashboard = "/teacher_dashboard";
   static const String teacherCourses = "/teacher_courses";
   static const  String  teacherStudent = "/teacherStudent";
+  static const String geminiChat = '/gemini-chat';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case geminiChat:
+         return MaterialPageRoute(builder: (_) => const GeminiChatbotScreen());
       case teacherStudent:
           return MaterialPageRoute(builder: (_) =>  StudentScreen());
       case teacherCourses:

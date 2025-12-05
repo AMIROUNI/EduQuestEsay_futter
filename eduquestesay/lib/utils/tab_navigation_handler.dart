@@ -38,7 +38,7 @@ class TabNavigationHandler {
       case 0:
         return AppRouter.home;
       case 1:
-        return AppRouter.home;
+        return AppRouter.geminiChat;
       case 2:
         return AppRouter.mycourses;
       case 3:
@@ -55,7 +55,7 @@ class TabNavigationHandler {
       case 0:
         return AppRouter.home;
       case 1:
-        return AppRouter.home;
+        return AppRouter.geminiChat;
       case 2:
         return AppRouter.teacherStudent;
       case 3:
